@@ -5,25 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:11:05 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 21:52:19 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:20:12 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:20:14 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_strchars_i(char *str, char *s)
-{
-	size_t	i;
-
-	i = -1;
-	if (!*str)
-		return (-1);
-	while (s[++i])
-		if (s[i] == *str)
-			return (1);
-	return (-1);
-}
+#include <unistd.h>
 
 char	*expand_path(char *str, int i, int quotes[2], char *var)
 {

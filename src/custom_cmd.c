@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:10:18 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 19:10:20 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:19:42 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:19:43 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	update_output(char ***matrix, int fd)
 		aux = ft_extend_matrix(aux, temp);
 		free(temp);
 	}
-	ft_free_matrix(*matrix);
+	ft_free_matrix(matrix);
 	*matrix = aux;
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:11:52 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/09 18:45:50 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:20:35 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:20:36 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	**ft_fill_array(char **aux, char const *s, char *set, int i[3])
 	return (aux);
 }
 
-char	**ft_cmdtrim(char *s, char *set)
+char	**ft_cmdtrim(char const *s, char *set)
 {
 	char	**aux;
 	int		nwords;
@@ -81,7 +81,6 @@ char	**ft_cmdtrim(char *s, char *set)
 	counts[1] = 0;
 	if (!s)
 		return (NULL);
-	s = str_replace(s);
 	nwords = ft_count_words(s, set, counts);
 	if (nwords == -1)
 		return (NULL);

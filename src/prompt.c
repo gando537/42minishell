@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:13:17 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/24 18:51:38 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:21:37 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:21:38 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*get_user(t_prompt prompt)
 		temp2 = ft_strjoin(NULL, YELLOW);
 	temp = ft_strjoin(temp2, *user);
 	free(temp2);
-	ft_free_matrix(user);
+	ft_free_matrix(&user);
 	return (temp);
 }
 

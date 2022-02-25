@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:12:10 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 19:56:36 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:20:47 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:20:48 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-#include <dirent.h>
 
 static char	*find_command(char **env_path, char *cmd, char *full_path)
 {
@@ -86,13 +85,13 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 		mini_perror(prompt, NPERM, n->full_path, 126);
 	if (dir)
 		closedir(dir);
-	ft_free_matrix(s);
+	ft_free_matrix(&s);
 }
 
 void	*exec_cmd(t_prompt *prompt, t_list *cmd)
 {
 	int		fd[2];
-	
+
 	get_cmd(prompt, cmd, NULL, NULL);
 	if (pipe(fd) == -1)
 		return (mini_perror(prompt, PIPERR, NULL, 1));
@@ -100,9 +99,7 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd)
 		return (NULL);
 	close(fd[WRITE_END]);
 	if (cmd->next && !((t_mini *)cmd->next->content)->infile)
-	{
 		((t_mini *)cmd->next->content)->infile = fd[READ_END];
-	}
 	else
 		close(fd[READ_END]);
 	if (((t_mini *)cmd->content)->infile > 2)

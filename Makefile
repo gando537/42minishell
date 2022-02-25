@@ -6,7 +6,7 @@
 #    By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 19:14:13 by mdiallo           #+#    #+#              #
-#    Updated: 2022/01/24 18:23:59 by mdiallo          ###   ########.fr        #
+#    Updated: 2022/01/26 17:23:49 by mdiallo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,13 +42,13 @@ SRC_DIR = src
 SRCB_DIR = srcb
 OBJ_DIR = obj
 OBJB_DIR = objb
-LIBFT = libft/libft.a
+LIBFT = libft/bin/libft.a
 NAME = minishell
 
-SRC = main.c builtins.c ft_strtrim_all.c exec.c	others.c			\
-	  fill_node.c get_params.c ft_cmdtrim.c	dup_env.c				\
-	  expand.c heredoc.c error.c env.c custom_cmd.c	str_replace.c	\
-	  get_next_line.c get_next_line_utils.c prompt.c				\
+SRC = main.c builtins.c ft_strtrim_all.c exec.c			\
+	  fill_node.c get_params.c ft_cmdtrim.c				\
+	  expand.c heredoc.c error.c env.c custom_cmd.c		\
+	  get_next_line.c get_next_line_utils.c prompt.c	\
 	  ft_cmdsubsplit.c signal.c parse_args.c get_cmd.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -67,12 +67,12 @@ all: $(NAME)
 
 $(NAME): create_dirs compile_libft $(OBJ)
 	@$(CC) -L ~/Library/Logs/Homebrew/readline -I ~/Library/Logs/Homebrew/readline/include $(CFLAGS) $(CDEBUG) $(OBJ) $(LIBFT) -lreadline -o $@
-	@$(PRINTF) "\r%100s\r$(GREEN)$(NAME) is up to date!$(DEFAULT)\n"
+	@$(PRINTF) "\r%50s\r$(GREEN)$(NAME) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@printf "\r%50s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
-	@$(CC) -I ~/Library/Logs/Homebrew/readlineinclude $(CFLAGS) $(CDEBUG) -c $< -o $@
+	@$(CC) -I ~/Library/Logs/Homebrew/readline/include $(CFLAGS) $(CDEBUG) -c $< -o $@
 
 compile_libft:
 	@make -C libft
@@ -80,12 +80,6 @@ compile_libft:
 
 create_dirs:
 	@mkdir -p $(OBJ_DIR)
-
-compare: all
-	@cd tests && ./compare.sh && cd ..
-
-test: all
-	@cd tests && ./test.sh && cd ..
 
 run: all
 	@$(LEAKS)./$(NAME)
@@ -101,22 +95,10 @@ fclean: clean
 	@$(PRINTF) "$(CYAN)Removed $(NAME)$(DEFAULT)\n"
 	@$(RM) $(NAME)
 
-norminette:
-	@if [ -d "libft" ]; then \
-		make norminette -C libft/; \
-	fi
-	@$(PRINTF) "$(CYAN)\nChecking norm for $(NAME)...$(DEFAULT)\n"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) inc/
-
 re: fclean
 	@make all
-
-git:
-	git add .
-	git commit
-	git push
 
 -include $(OBJ_DIR)/*.d
 -include $(OBJB_DIR)/*.d
 
-.PHONY: all clean fclean bonus norminette create_dirs test git re
+.PHONY: all clean fclean bonus create_dirs re

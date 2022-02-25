@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:10:53 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 19:10:55 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:20:04 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:20:07 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 	}
 	else if (!pid)
 		child_process(prompt, cmd, fd);
-	if (pid >= 0 && !cmd->next)
-		waitpid(pid, &prompt->e_status, 0);
 }
 
 void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])

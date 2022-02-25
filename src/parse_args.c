@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:13:09 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/09 18:43:05 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:21:31 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:21:32 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**split_all(char **args, t_prompt *prompt)
 		subsplit = ft_cmdsubsplit(args[i], "<|>");
 		ft_matrix_replace_in(&args, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
-		ft_free_matrix(subsplit);
+		ft_free_matrix(&subsplit);
 	}
 	return (args);
 }
@@ -35,12 +35,18 @@ static char	**split_all(char **args, t_prompt *prompt)
 static void	*parse_args(char **args, t_prompt *p)
 {
 	int	is_exit;
+	int	i;
 
 	is_exit = 0;
 	p->cmds = fill_nodes(p, split_all(args, p), -1);
 	if (!p->cmds)
 		return (p);
+	i = ft_lstsize(p->cmds);
 	p->e_status = builtin(p, p->cmds, &is_exit, 0);
+	while (i-- > 0)
+		waitpid(-1, &p->e_status, 0);
+	if (!is_exit && p->e_status == 13)
+		p->e_status = 0;
 	if (p->e_status > 255)
 		p->e_status = p->e_status / 255;
 	if (args && is_exit)

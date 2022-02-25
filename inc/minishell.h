@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:09:56 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/09 18:46:19 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:16:32 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:16:33 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 # include "colors.h"
 # include "get_next_line.h"
 # include <fcntl.h>
@@ -22,7 +22,6 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
-# include <unistd.h>
 # include <dirent.h>
 
 # define READ_END 0
@@ -96,7 +95,7 @@ int		mini_exit(t_list *cmd, int *is_exit);
 void	*check_args(char *out, t_prompt *p);
 
 /* Splits command and args into a matrix, taking quotes into account */
-char	**ft_cmdtrim(char *s, char *set);
+char	**ft_cmdtrim(char const *s, char *set);
 
 /* Copy of ft_split but includes separators and takes quotes into account */
 char	**ft_cmdsubsplit(char const *s, char *set);
@@ -154,28 +153,6 @@ void	*mini_perror(t_prompt *prompt, int err_type, char *param, int errno);
 
 /* Retrieves a string with malloc containing the value of an env var */
 char	*mini_getenv(char	*var, char **envp, int n);
-
-char	**ft_dup_env(char **envp);
-
-void	ft_free_matrix(char **tab);
-
-char	**ft_extend_matrix(char **src, char *s);
-
-void	ft_putmatrix_fd(char **env, int fd);
-
-int		ft_strchars_i(char *str, char *s);
-
-int		ft_isspace(char c);
-
-int		ft_matrixlen(char **s);
-
-int		nb_inoutput(char *str);
-
-int		ft_isinset(int c, char *set);
-
-void	ft_matrix_replace_in(char ***envp, char **s, int ij);
-
-char	*str_replace(char *str);
 
 /* Sets a new environment variable */
 char	**mini_setenv(char *var, char *value, char **envp, int n);

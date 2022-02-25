@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:11:18 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 20:13:43 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:20:22 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:20:22 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	**get_trimmed(char **args)
 	int		j;
 
 	j = -1;
-	temp = ft_dup_env(args);
+	temp = ft_dup_matrix(args);
 	while (temp && temp[++j])
 	{
 		aux = ft_strtrim_all(temp[j], 0, 0);
@@ -73,8 +73,8 @@ static char	**get_trimmed(char **args)
 static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 {
 	ft_lstclear(&cmds, free_content);
-	ft_free_matrix(temp);
-	ft_free_matrix(args);
+	ft_free_matrix(&temp);
+	ft_free_matrix(&args);
 	return (NULL);
 }
 
@@ -101,7 +101,7 @@ t_list	*fill_nodes(t_prompt *prompt, char **args, int i)
 		if (!args[i])
 			break ;
 	}
-	ft_free_matrix(temp[1]);
-	ft_free_matrix(args);
+	ft_free_matrix(&temp[1]);
+	ft_free_matrix(&args);
 	return (cmds[0]);
 }

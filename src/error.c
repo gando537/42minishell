@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:10:45 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 19:10:46 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:19:56 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:19:58 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	free_content(void *content)
 	t_mini	*node;
 
 	node = content;
-	ft_free_matrix(node->full_cmd);
+	ft_free_matrix(&node->full_cmd);
 	free(node->full_path);
 	if (node->infile != STDIN_FILENO)
 		close(node->infile);

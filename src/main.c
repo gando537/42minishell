@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:12:52 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/24 18:40:22 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:21:22 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:21:25 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_prompt	init_prompt(char **argv, char **envp)
 
 	str = NULL;
 	prompt.cmds = NULL;
-	prompt.envp = ft_dup_env(envp);
+	prompt.envp = ft_dup_matrix(envp);
 	prompt.e_status = 0;
 	prompt.pid = mini_getpid(&prompt);
 	prompt = init_vars(prompt, str, argv, envp);
@@ -99,6 +99,6 @@ int	main(int argc, char **argv, char **envp)
 		if (!check_args(out, &prompt))
 			break ;
 	}
-	ft_free_matrix(prompt.envp);
+	ft_free_matrix(&prompt.envp);
 	exit(prompt.e_status);
 }

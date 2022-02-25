@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiallo <mdiallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 19:10:09 by mdiallo           #+#    #+#             */
-/*   Updated: 2022/01/06 20:04:48 by mdiallo          ###   ########.fr       */
+/*   Created: 2022/01/26 17:19:29 by mdiallo           #+#    #+#             */
+/*   Updated: 2022/01/26 17:19:30 by mdiallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	mini_cd(t_prompt *prompt)
 	str[1] = ft_extend_matrix(str[1], aux);
 	free(aux);
 	prompt->envp = mini_setenv("PWD", str[1][2], prompt->envp, 3);
-	ft_free_matrix(str[1]);
+	ft_free_matrix(&str[1]);
 	return (prompt->e_status);
 }
 
